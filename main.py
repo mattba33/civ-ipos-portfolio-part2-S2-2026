@@ -1,8 +1,14 @@
 from src.task_manager import add_task, delete_task, list_tasks
 from src.file_handler import load_tasks
+from src.task_display import TaskDisplay
 
 
 def main():
+
+    task_display = TaskDisplay()
+    
+    task_display.display_tasks
+
     tasks = load_tasks()
     while True:
         print("\nTask Manager CLI")

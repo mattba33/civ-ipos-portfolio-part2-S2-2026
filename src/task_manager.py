@@ -1,7 +1,9 @@
 from src.task import Task
 from src.file_handler import save_tasks
+from src.task_display import TaskDisplay
 from datetime import datetime
 
+task_display = TaskDisplay()
 
 def add_task(tasks, title, description, due_date):
     """
@@ -72,28 +74,13 @@ def list_tasks(tasks, status=None):
 
     Returns:
         None
-
-    Side Effects:
-        - Prints the list of tasks to the console.
     """
-    if not status:
-        # If status is not set
-        filtered = tasks
+    if status:
+        filtered = filter_tasks_by_status(tasks, status)
     else:
-        # Filter tasks based on their status
-        filtered = []
-        for task in tasks:
-            if task.status == status:
-                filtered.append(task)
+        filtered = tasks
 
-    if not filtered:
-        print("No tasks found.")
-        return
-    for task in filtered:
-        print(
-            f"{task.title} | {task.description} | "
-            f"Due: {task.due_date} | Status: {task.status}"
-        )
+    task_display.display_tasks(filtered)
 
 
 def filter_tasks_by_status(tasks, status):
