@@ -5,6 +5,10 @@ from datetime import datetime
 
 task_display = TaskDisplay()
 
+
+def load_options():
+    task_display.display_options()
+
 def add_task(tasks, title, description, due_date):
     """
     Add a new task to the task list.
@@ -37,6 +41,7 @@ def add_task(tasks, title, description, due_date):
         return False
 
     tasks.append(Task(title, description, due_date))
+    task_display.display_task_added()
     save_tasks(tasks)
     return True
 

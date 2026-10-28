@@ -1,23 +1,16 @@
-from src.task_manager import add_task, delete_task, list_tasks
+from src.task_manager import load_options, add_task, delete_task, list_tasks
 from src.file_handler import load_tasks
-from src.task_display import TaskDisplay
 
 
 def main():
 
-    task_display = TaskDisplay()
-    
-    task_display.display_tasks
-
     tasks = load_tasks()
-    while True:
-        print("\nTask Manager CLI")
-        print("1. Add Task")
-        print("2. Delete Task")
-        print("3. List Tasks")
-        print("4. Exit")
 
-        choice = input("Enter your choice: ")
+    while True:
+
+        load_options()
+
+        choice = input("Enter your Choice: ")
         if choice == "1":
             title = input("Title: ")
             description = input("Description: ")
@@ -30,6 +23,7 @@ def main():
             else:
                 print("Task not found.")
         elif choice == "3":
+            print("\n")
             list_tasks(tasks)
         elif choice == "4":
             print("Exiting Task Manager.")

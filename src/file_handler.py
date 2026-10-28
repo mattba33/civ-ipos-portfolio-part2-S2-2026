@@ -15,6 +15,7 @@ def load_tasks():
     if os.path.exists(TASK_FILE):
         with open(TASK_FILE, "rb") as file:
             return pickle.load(file)
+    
     return []
 
 
