@@ -1,12 +1,11 @@
-
 import os
 import sys
+import unittest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-import unittest
-from src.file_handler import load_tasks, save_tasks
-from src.task import Task
+from src.file_handler import load_tasks, save_tasks  # noqa: E402
+from src.task import Task  # noqa: E402
 
 
 TEST_FILE = "test_tasks.bin"

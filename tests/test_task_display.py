@@ -1,13 +1,12 @@
-
 import os
 import sys
+import unittest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-import unittest
-from rich.console import Console
-from src.task_display import TaskDisplay
-from src.task import Task
+from rich.console import Console  # noqa: E402
+from src.task_display import TaskDisplay  # noqa: E402
+from src.task import Task  # noqa: E402
 
 
 class TestTaskDisplay(unittest.TestCase):

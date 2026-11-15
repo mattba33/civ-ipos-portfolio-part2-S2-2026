@@ -15,6 +15,7 @@ def load_options():
     """
     task_display.display_options()
 
+
 def add_task(tasks, title, description, due_date):
     """
     Add a new task to the task list.
@@ -29,7 +30,8 @@ def add_task(tasks, title, description, due_date):
         bool: True if the task is added successfully, False otherwise.
 
     Side Effects:
-        - Displays an error message if the title already exists or the due date is invalid.
+        - Displays an error message if the title already exists or the due date is
+          invalid.
         - Displays a confirmation message when the task is added successfully.
         - Saves the updated task list to a file using `save_tasks`.
     """
