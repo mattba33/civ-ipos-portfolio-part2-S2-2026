@@ -16,8 +16,8 @@ class DateValidator:
             return False
         
         try:
-            parser.parse(date_string, dayfirst=True)
-            return True
+            parsed_date = parser.parse(date_string, dayfirst=True)
+            return parsed_date.strftime("%d-%m-%y") == date_string
         
         except (ParserError, ValueError, OverflowError):
             return False
