@@ -1,7 +1,6 @@
 from src.task import Task
 from src.file_handler import save_tasks
 from src.date_validator import DateValidator
-from datetime import datetime
 
 
 def add_task(tasks, title, description, due_date):
