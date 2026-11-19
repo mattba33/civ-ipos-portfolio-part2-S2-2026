@@ -28,7 +28,7 @@ class DateValidator:
         if not isinstance(date_string, str):
             return False
 
-        if not re.fullmatch(r"\d{2}-\d{2}-\d{2}", date_string):
+        if not re.fullmatch(r"\d{2}-\d{2}-\d{4}", date_string):
             return False
 
         try:
