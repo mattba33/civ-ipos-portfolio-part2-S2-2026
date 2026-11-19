@@ -1,3 +1,4 @@
+
 import re
 
 from dateutil import parser
@@ -15,7 +16,7 @@ class DateValidator:
     @staticmethod
     def validation_date(date_string):
         """
-        Validate a date string in DD-MM-YY format.
+        Validate a date string in DD-MM-YYYY format.
 
         Args:
             date_string (str): The date string to validate.
@@ -33,7 +34,7 @@ class DateValidator:
 
         try:
             parsed_date = parser.parse(date_string, dayfirst=True)
-            return parsed_date.strftime("%d-%m-%y") == date_string
+            return parsed_date.strftime("%d-%m-%Y") == date_string
 
         except (ParserError, ValueError, OverflowError):
             return False
