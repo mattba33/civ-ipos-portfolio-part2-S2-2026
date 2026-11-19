@@ -1,6 +1,6 @@
 from src.task import Task
 from src.file_handler import save_tasks
-from datetime import datetime
+from src.date_validator import DateValidator
 
 
 def add_task(tasks, title, description, due_date):
@@ -28,9 +28,7 @@ def add_task(tasks, title, description, due_date):
         return False
 
     # Validate due date format
-    try:
-        datetime.strptime(due_date, "%d-%m-%Y")
-    except ValueError:
+    if not DateValidator.validation_date(due_date):
         print("Error: Invalid date format. Use DD-MM-YYYY.")
         return False
 
