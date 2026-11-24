@@ -1,295 +1,180 @@
-# Use pre-existing components (ICTPRG439)
+# Task Manager CLI
 
----
+A Python-based command-line Task Manager application that allows users to create, manage and display tasks. The application uses reusable Python libraries to improve its functionality, date validation and terminal presentation.
 
-## **Overview**
+## Features
 
-This activity requires you to:
+- **Add Tasks:** Create tasks with a title, description and due date.
+- **Delete Tasks:** Remove existing tasks using their title.
+- **List Tasks:** View existing tasks in a structured table.
+- **Duplicate Prevention:** Prevents tasks with duplicate titles from being added.
+- **Date Validation:** Uses `python-dateutil` to validate due dates and reject invalid dates.
+- **Rich Terminal Interface:** Uses the Rich library to display formatted tables, panels and styled terminal output.
+- **File Storage:** Saves and loads tasks using the existing file handling functionality.
 
-- Investigate and incorporate reusable components into an existing application.
-- Debug and improve the provided **Task Management CLI App**.
-- Use **GitHub Issues** for tracking bugs and improvements.
-- Write unit tests to verify issues and fixes.
-- Open and update **Pull Requests (PRs)**.
-- Update and maintain project documentation.
-- Demonstrate effective use of Git and GitHub workflows.
+## Technologies and Dependencies
 
----
+The project uses the following Python libraries:
 
-## **Workflow**
+| Library | Purpose |
+|---|---|
+| Rich | Formats terminal output using tables, panels and colours. |
+| python-dateutil | Provides date parsing and validation functionality. |
+| unittest | Tests application functionality using Python's built-in testing framework. |
+| Flake8 | Checks code quality and compliance with Python style guidelines. |
 
----
+## Installation and Setup
 
-### 1. Familiarise Yourself with the Project
-
-1. **Clone the repository**:
+### 1. Clone the repository
 
 ```bash
 git clone <repository-url>
 cd pin_civ_assessment_ipos_portfolio_2
 ```
 
-2. Use the Virtual Environment
-
-NOTE: **activate a virtual environment** in Python, the command varies depending on your **operating system** and the **shell/terminal** you are using. Here's a clear step-by-step guide:
-
----
-
-### 2. Create a Virtual Environment
-
-Before activating, you must create the virtual environment in your project folder:
+### 2. Create a virtual environment
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 ```
 
-`.venv` is the directory name for the virtual environment (you can name it whatever you want).
+### 3. Activate the virtual environment
 
----
+For macOS/Linux:
 
-1. **Activate the environment**
+```bash
+source .venv/bin/activate
+```
 
-**For Windows**:
+For Windows:
 
-```cmd
+```bash
 .venv\Scripts\activate
 ```
 
-```powershell
-.\.venv\Scripts\Activate
-```
+### 4. Install the project and dependencies
 
-**For Mac/Linux & Gitbash**
-
-In a **Bash** or **Zsh** terminal, run:
-
-```bash
-source .venv/bin/activate  #Mac/Linux
-source .venv/Scripts/activate #Windows Gitbash
-```
-
-**Use the pyproject.toml files to manager the environment & add the scripts to run the app**
+Install the project in editable mode:
 
 ```bash
 python -m pip install -e .
 ```
 
----
-
-2. **To update project dependences dependencies**:
+Install development dependencies:
 
 ```bash
-pip install -r requirements-dev.txt #(may require python -m)
+python -m pip install -r requirements-dev.txt
 ```
 
-3. **Run the application**:
+## Running the Application
+
+To start the Task Manager CLI:
 
 ```bash
-python main.py #(may require python -m)
+python main.py
 ```
 
-Explore the current functionality. Try adding, deleting, and listing tasks.
+The application provides options to:
 
-4. **Read the Documentation**:
-   - Review the `onboarding.md` file for project setup and guidelines.
-   - Examine the current `README.md` and inline comments for existing functionality.
+1. Add a task.
+2. Delete a task.
+3. List existing tasks.
+4. Exit the application.
 
----
+When creating a task, enter a title, description and due date.
 
-### 2. Debugging and Identifying Enhancement Issues
+### Due Date Validation
 
-Use debugging tools (e.g., breakpoints, print statements, IDE tools) to identify **two issues** or areas where reusable components can improve the app.
+The application uses `python-dateutil` to validate due dates.
 
-## **Examples of Suggested Components for Application Enhancement**
+Dates must follow the `DD-MM-YY` format.
 
-1. **`click`** – Improve CLI usability and interactivity.
-2. **`python-dateutil`** – Ensure robust date validation.
-3. **`rich`** – Format task outputs with tables and colors.
-4. **`colorama`** – Add terminal colors for task statuses.
-5. **`tabulate`** – Format task lists as clean tables.
-6. **`SQLAlchemy`** – Use SQLite for structured, scalable storage.
-7. **`loguru`** – Add detailed logging for debugging.
-8. **`mock`** – Mock file handling and inputs for testing.
-9. **`schedule`** – Automate task reminders for due dates.
+Examples:
 
----
+| Input | Result |
+|---|---|
+| `18-11-26` | Valid date |
+| `31-02-26` | Invalid date |
+| `32-11-26` | Invalid date |
+| `18/11/26` | Incorrect format |
 
-## **Example of Component Use**
+Invalid dates are rejected, and the task will not be added.
 
-1. **User-Friendly CLI**:  
-   Combine `click` for CLI commands and `rich` to display tasks as tables with colorful statuses.
-2. **Database-Driven Storage**:  
-   Replace file-based storage with `SQLAlchemy` to allow structured task management and easy queries.
-3. **Robust Testing**:  
-   Use `mock` to test task operations without affecting actual data files.
-4. **Automated Reminders**:  
-   Integrate `schedule` to periodically remind users of due tasks.
+## Testing
 
----
+The project uses Python's built-in `unittest` framework.
 
-## **Record your findings** and raise **two GitHub Issues**.
-
-### 3. Raise 2 Issues in GitHub Issues
-
-1. Go to the GitHub repository for this project.
-2. Navigate to the **"Issues"** tab.
-3. Document each bug/feature as a separate Issue with the repo template, including:
-   - A clear title.
-   - A description of the problem.
-   - Reasoning for enhancement & component selection
-
----
-
-### 4. Create Local and Remote Branches
-
-1. **Locally**: Create a new branch for each Issue.
+To run all unit tests:
 
 ```bash
-git checkout -b issue-<issue_number>
+python -m unittest discover -s tests
 ```
 
-2. **Remotely**: Push the branch to GitHub.
+Individual test files can also be executed:
 
 ```bash
-git push -u origin issue-<issue_number>
+python3 tests/test_date_validator.py
 ```
 
----
+The tests cover:
 
-### 5. Add and Test Reusable Components
+- Task creation and deletion.
+- Duplicate task prevention.
+- Date validation.
+- Invalid date formats.
+- Invalid days and months.
+- Rich terminal display functionality.
+- File saving and loading.
 
-1. **Select Components**: Research and integrate suitable Python libraries:
-2. **Write Test Cases**:  
-   Using mock & patch objects write unit tests for the issues you raised using the **`unittest` framework**.
-   - Test invalid dates.
-   - Test duplicate task prevention.
-   - Test new CLI behavior (if applicable).
+## Code Quality
 
-3. Run tests to confirm that your new test cases fail:
+The project uses Flake8 to check Python code for style and formatting issues.
+
+Run Flake8 from the project root directory:
 
 ```bash
-python -m unittest discover test
+python -m flake8 src/ tests/
 ```
 
----
+Resolve any reported issues before submitting changes.
 
-### 6. Fix the Code
+## Project Structure
 
-1. Incrementally integrate the selected reusable components into the project.
-2. Address the bugs/issues raised in your branch.
-3. Rerun the tests to ensure they pass:
-
-```bash
-python -m unittest discover test
+```text
+TaskManager/
+│
+├── src/
+│   ├── main.py
+│   ├── task.py
+│   ├── task_manager.py
+│   ├── file_handler.py
+│   ├── task_display.py
+│   └── date_validator.py
+│
+├── tests/
+│   ├── test_task_manager.py
+│   ├── test_file_handler.py
+│   ├── test_task_display.py
+│   └── test_date_validator.py
+│
+├── requirements.txt
+├── requirements-dev.txt
+├── pyproject.toml
+├── README.md
+└── main.py
 ```
 
----
+*Note: The project structure may change as additional functionality is introduced.*
 
-### 7. Update the Documentation
+## Development
 
-1. Add or update inline comments explaining changes.
-2. Update the **README.md** to include:
-   - New dependencies.
-   - Instructions for running and testing the updated app.
-3. Update the **`requirements-dev.txt`** file with any new libraries:
+This project was enhanced as part of the ICTPRG439 assessment, focusing on investigating and integrating reusable components into an existing application.
 
-```bash
-pip freeze > requirements.txt
-```
+The improvements include:
 
----
+- Integration of the Rich library to improve terminal presentation.
+- Integration of python-dateutil to improve due date validation.
+- Additional unit tests to verify new and existing functionality.
+- Updated documentation to reflect the application's improvements.
 
-### 8. Run your workflows locally
-
-**Before pushing your code to GitHub, you should run flake8 locally to check for code quality issues.**
-
-- If flake8 fails locally, your GitHub Actions workflow will also fail.
-- You cannot merge without these passing.
-
-1. Run flake8 - from the root of the project (where .flake8 is located):
-
-```bash
-python -m flake8 /src
-
-# Optional detailed report
-python -m flake8 . --statistics --show-source
-```
-
-2. What to do
-   - Fix any errors shown in the output
-   - Re-run flake8 until no errors remain
-
-3. Thess come from the workflow some common issues you may see
-   - Unused imports or variables
-   - Line length too long
-   - Functions too complex
-   - Debug print() statements (not allowed)
-
----
-
-### 9. Submit a Pull Request (PR)
-
-**Note you must use the PULL and ISSUE templates provided**
-
-1. Open a Pull Request (PR) for each Issue against the `main` branch.
-2. Ensure your PR description includes:
-   - A clear summary of changes.
-   - The Issue number it addresses (`fixes #<issue_number>`).
-   - Evidence that the new test cases pass.
-
-3. Push any updates to the branch:
-
-```bash
-   git add .
-   git commit -m "Fixed <issue_number>: Added date validation"
-   git push
-```
-
----
-
-### 10. Seek PR Approval
-
-#### DONT MISS THIS STEP AS YOU WILL HAVE TO REVERT IT BACK
-
-- Request your lecturer as a reviewer on your PR.
-- Address any feedback provided.
-
----
-
-### 11. Close the Issue
-
-When the PR is merged, the Issue will be automatically closed if you included "fixes #\<issue_number\>" in the PR description.
-
----
-
-### 11. Complete Reflection Questions
-
-1. Complete **KBA Testing Documentation & Reusability**
-2. Reflect on the following:
-   - What reusable components did you select and why?
-   - How did the components improve the project?
-   - What challenges did you face when debugging or integrating the components?
-
----
-
-## **Assessment Criteria**
-
-1. **Identification** of bugs/issues and selection of appropriate reusable components.
-2. **Effective use of GitHub**:
-   - Properly raised Issues and branches.
-   - Clean, descriptive Pull Requests.
-3. **Code Quality**:
-   - Fixes implemented correctly.
-   - Integration of reusable components.
-4. **Testing**:
-   - Unit tests that expose and confirm fixes.
-5. **Documentation**:
-   - Updated inline comments and README.md.
-   - Updated `requirements-dev.txt`.
-6. **PR Workflow**:
-   - Demonstrated initial test failures and successful fixes.
-   - Approval workflow completed.
-7. **Reflection**:
-   - Answered knowledge questions with thoughtful insights.
-
----
+GitHub Issues and Pull Requests are used to track changes, document improvements and review code before merging into the main branch.
