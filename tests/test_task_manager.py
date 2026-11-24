@@ -1,8 +1,13 @@
-import unittest
-from src.task_manager import add_task, delete_task, filter_tasks_by_status
-from src.file_handler import save_tasks, load_tasks
-from src.task import Task
 import os
+import sys
+import unittest
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from src.task_manager import add_task, delete_task, filter_tasks_by_status  # noqa: E402
+from src.file_handler import save_tasks, load_tasks  # noqa: E402
+from src.task import Task  # noqa: E402
+
 
 TEST_FILE = "test_tasks.bin"
 
