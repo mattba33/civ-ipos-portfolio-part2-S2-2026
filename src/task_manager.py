@@ -1,6 +1,19 @@
 from src.task import Task
 from src.file_handler import save_tasks
 from src.date_validator import DateValidator
+from src.task_display import TaskDisplay
+
+task_display = TaskDisplay()
+
+
+def load_options():
+    """
+    Display the available Task Manager menu options.
+
+    Returns:
+        None
+    """
+    task_display.display_options()
 
 
 def add_task(tasks, title, description, due_date):
@@ -16,10 +29,10 @@ def add_task(tasks, title, description, due_date):
     Returns:
         bool: True if the task is added successfully, False otherwise.
 
-    Raises:
-        ValueError: If the due date is not in the correct format.
-
     Side Effects:
+        - Displays an error message if the title already exists or the due date is
+          invalid.
+        - Displays a confirmation message when the task is added successfully.
         - Saves the updated task list to a file using `save_tasks`.
     """
     # Prevent duplicate tasks
@@ -33,6 +46,7 @@ def add_task(tasks, title, description, due_date):
         return False
 
     tasks.append(Task(title, description, due_date))
+    task_display.display_task_added(title, description, due_date)
     save_tasks(tasks)
     return True
 
@@ -65,33 +79,23 @@ def list_tasks(tasks, status=None):
 
     Args:
         tasks (list): The list of existing Task objects.
-        status (str, optional): The status to filter tasks
-        by (e.g., "pending" or "completed").
+        status (str, optional): The status to filter tasks by,
+            such as "pending" or "completed". Defaults to None.
 
     Returns:
         None
 
     Side Effects:
-        - Prints the list of tasks to the console.
+        - Displays the tasks using the TaskDisplay class.
+        - Only displays tasks matching the specified status if a
+          status filter is provided.
     """
-    if not status:
-        # If status is not set
-        filtered = tasks
+    if status:
+        filtered = filter_tasks_by_status(tasks, status)
     else:
-        # Filter tasks based on their status
-        filtered = []
-        for task in tasks:
-            if task.status == status:
-                filtered.append(task)
+        filtered = tasks
 
-    if not filtered:
-        print("No tasks found.")
-        return
-    for task in filtered:
-        print(
-            f"{task.title} | {task.description} | "
-            f"Due: {task.due_date} | Status: {task.status}"
-        )
+    task_display.display_tasks(filtered)
 
 
 def filter_tasks_by_status(tasks, status):
